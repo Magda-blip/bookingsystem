@@ -1,0 +1,39 @@
+Booking System
+
+Ett REST API byggt med Java och Spring Boot. Projektet använder PostgreSQL som databas, Docker Compose för att hantera tjänsterna och Nginx som reverse proxy och lastbalanserare.
+
+
+Klona projektet från GitHub.
+
+Skapa en fil med namnet .env i projektets rotmapp.
+
+Lägg in följande variabler i filen och ange ett eget lösenord:
+
+DB_NAME=magda_db
+DB_USER=magda
+DB_PASSWORD=byt-till-eget-lösenord
+
+Bygg och starta projektet med:
+
+./gradlew clean build
+docker compose up -d --build --scale api=3
+
+Docker Compose startar då PostgreSQL, tre backend-instanser och Nginx.
+
+Använd API:et
+
+När projektet körs nås API:et via:
+
+http://localhost/bookings – hantera bokningar
+
+http://localhost/instance – se vilken backend-instans som hanterar anropet
+
+Nginx tar emot anropen och fördelar dem mellan tillgängliga backend-instanser.
+
+
+
+Stoppa alla tjänster med:
+
+docker compose down
+
+Databasen sparas i en Docker-volym och finns kvar när containrarna stoppas.
